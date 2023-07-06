@@ -1,14 +1,14 @@
 /*
-*  1)Search button not working
-*  2)after typing something on the search textbox, you should be able to press enter to get search result
-*  3)spinner is always running. should be displayed at the time of data loading
-*  4)If you search for 'iphone', check the api, you should get a lot of data but the UI displays only one phone
-*  5)Search is not clearing previous results
-*  6)picture of the phones are not showing
-*  7)Show All button should be hidden after all data is loaded
-*  8)Load phone details doesn't display anything
-*  9)Phone details are added on the modal but this is not getting displayed. why?
-*  10)Storage on Modal isn't getting displayed properly
+?  1)Search button not working
+?  2)after typing something on the search textbox, you should be able to press enter to get search result
+?  3)spinner is always running. should be displayed at the time of data loading
+?  4)If you search for 'iphone', check the api, you should get a lot of data but the UI displays only one phone
+?  5)Search is not clearing previous results
+?  6)picture of the phones are not showing
+?  7)Show All button should be hidden after all data is loaded
+!  8)Load phone details doesn't display anything
+!  9)Phone details are added on the modal but this is not getting displayed. why?
+!  10)Storage on Modal isn't getting displayed properly
 */
 
 const loadPhones = async(searchText, dataLimit) =>{
@@ -97,24 +97,23 @@ document.getElementById('btn-show-all').addEventListener('click', function(){
 })
 
 const loadPhoneDetails = async id =>{
-    const url =`www.openapi.programming-hero.com/api/phone/${id}`;
+    // const url =`www.openapi.programming-hero.com/api/phone/${id}`;
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`
     const res = await fetch(url);
     const data = await res.json();
     displayPhoneDetails(data.data);
 }
 
 const displayPhoneDetails = phone =>{
-    console.log(phone);
     const modalTitle = document.getElementById('phoneDetailModalLabel');
     modalTitle.innerText = phone.name;
     const phoneDetails = document.getElementById('phone-details');
-    console.log(phone.mainFeatures.sensors[0]);
     phoneDetails.innerHTML = `
         <p>Release Date: ${phone.releaseDate}</p>
-        <p>Storage: ${phone.mainFeatures}</p>
+        <p>Storage: ${phone.mainFeatures.storage}</p>
         <p>Others: ${phone.others ? phone.others.Bluetooth : 'No Bluetooth Information'}</p>
         <p>Sensor: ${phone.mainFeatures.sensors ? phone.mainFeatures.sensors[0] : 'no sensor'}</p>
     `
 }
 
-// loadPhones('apple');
+loadPhones('apple');
