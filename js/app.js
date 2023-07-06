@@ -20,7 +20,7 @@ const loadPhones = async(searchText, dataLimit) =>{
 
 const displayPhones = (phones, dataLimit) =>{
     const phonesContainer = document.getElementById('phones-container');
-    // phonesContainer.textContent = '';
+    phonesContainer.textContent = '';
     // display 10 phones only 
     const showAll = document.getElementById('show-all');
     if(dataLimit && phones.length > 10) {
@@ -40,7 +40,6 @@ const displayPhones = (phones, dataLimit) =>{
     }
     // display all phones
     phones.forEach(phone =>{
-        console.log(phone.image);
         const phoneDiv  = document.createElement('div');
         phoneDiv.classList.add('col');
         phoneDiv.innerHTML = `
@@ -94,6 +93,7 @@ const toggleSpinner = isLoading => {
 // not the best way to load show All
 document.getElementById('btn-show-all').addEventListener('click', function(){
     processSearch();
+    document.getElementById('show-all').classList.add('d-none')
 })
 
 const loadPhoneDetails = async id =>{
